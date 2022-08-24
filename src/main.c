@@ -1,8 +1,7 @@
 #include "../include/http_server.h"
 
 int main() {
-    int server_socket = setup_server();
-    run_server(server_socket);
+    HttpServer server = setup_server();
 
-    return 0;
+    return run_server(server);
 }

@@ -6,10 +6,10 @@
 #include <string.h>
 #include <unistd.h>
 
-int setup_server() {
-    int server_socket;
+HttpServer setup_server() {
+    HttpServer server;
 
-    if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+    if ((server.socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         perror("Cannot create socket: ");
         exit(EXIT_FAILURE);
     }
@@ -20,26 +20,26 @@ int setup_server() {
     address.sin_addr.s_addr = htonl(INADDR_ANY);
     address.sin_port = htons(PORT);
 
-    if (bind(server_socket, (struct sockaddr*)&address, sizeof(address)) < 0) {
+    if (bind(server.socket, (struct sockaddr*)&address, sizeof(address)) < 0) {
         perror("Cannot bind socket: ");
         exit(EXIT_FAILURE);
     }
 
-    if (listen(server_socket, MAX_PENDING_CONS) < 0) {
+    if (listen(server.socket, MAX_PENDING_CONS) < 0) {
         perror("Cannot listen: ");
         exit(EXIT_FAILURE);
     }
 
-    return server_socket;
+    return server;
 }
 
-void run_server(int server_socket) {
+int run_server(HttpServer server) {
     for (;;) {
         int new_socket;
         socklen_t addr_len;
         struct sockaddr address;
 
-        if ((new_socket = accept(server_socket, &address, &addr_len)) < 0) {
+        if ((new_socket = accept(server.socket, &address, &addr_len)) < 0) {
             perror("Cannot accept connection: ");
             exit(EXIT_FAILURE);
         }

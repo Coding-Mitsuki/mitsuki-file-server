@@ -27,7 +27,7 @@ typedef struct Header {
 
 typedef struct Headers {
     size_t headers_size;
-    Header headers[];
+    Header* headers;
 } Headers;
 
 size_t header_string_length(const Header header);
