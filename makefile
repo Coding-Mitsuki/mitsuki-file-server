@@ -7,10 +7,10 @@ SRCDIR=src
 
 LIBS=
 
-_DEPS=
+_DEPS=http_server.h headers.h request.h response.h
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ=main.o
+_OBJ=main.o http_server.o headers.o request.o response.o
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: $(SRCDIR)/%.c $(DEPS)
