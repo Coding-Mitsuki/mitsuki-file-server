@@ -1,3 +1,11 @@
 #include "../include/response.h"
 
-typedef int trash;
+Response default_response() {
+    Response response = {
+        .status = NOT_FOUND,
+        .headers = empty_headers(),
+        .body = "",
+    };
+
+    return response;
+}

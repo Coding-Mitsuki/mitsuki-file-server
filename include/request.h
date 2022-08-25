@@ -13,6 +13,9 @@ typedef enum RequestType {
 typedef struct Request {
     RequestType type;
     Headers headers;
+    char* path;
 } Request;
+
+Request handle_request(char* const raw_request);
 
 #endif // REQUEST_H

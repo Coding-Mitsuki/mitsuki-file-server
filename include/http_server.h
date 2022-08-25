@@ -12,9 +12,9 @@
 // when a request to this route is received.
 // Routes are specific to request types.
 typedef struct Route {
-    RequestType request_type;
-    char* route;
-    Response (*manage_route)(Request);
+    RequestType type;
+    char* path;
+    Response (*handler)(Request);
 } Route;
 
 typedef struct HttpServer {
@@ -24,6 +24,7 @@ typedef struct HttpServer {
 } HttpServer;
 
 HttpServer setup_server();
-int run_server(HttpServer server);
+void add_route(HttpServer* const server, RequestType type, char* route, Response (*handler)(Request));
+int run_server(HttpServer* server);
 
 #endif // HTTP_SERVER_H

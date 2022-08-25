@@ -26,12 +26,12 @@ typedef struct Header {
 } Header;
 
 typedef struct Headers {
-    size_t headers_size;
+    size_t nb_headers;
     Header* headers;
 } Headers;
 
-size_t header_string_length(const Header header);
-/* void header_to_string(const Header header, char* const restrict dest); */
-void header_to_string(const Header header, char* const dest);
+Headers empty_headers();
+size_t header_string_length(const Header* const header);
+void header_to_string(const Header* const header, char* const dest);
 
 #endif // HEADERS_H
